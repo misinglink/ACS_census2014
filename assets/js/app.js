@@ -171,10 +171,12 @@ let circleLabelGroup = chartGroup.append('g')
 
         xlabelsGroup.selectAll('text').on('click', function() {
             let xLabel = d3.select(this)
+            let xActiveLabel = d3.select('.active')
             let xValue = xLabel.attr('value')
             console.log(xValue)
             if (xValue != xCurrentSelection) {
                 xLabel.classed('active', true)
+                xActiveLabel.classed('active', false)
                 xCurrentSelection = xValue
                 xLinearScale = xScale(data, xCurrentSelection)
                 xAxis = renderXAxis(xLinearScale, xAxis)
@@ -221,8 +223,10 @@ let circleLabelGroup = chartGroup.append('g')
 
     ylabelsGroup.selectAll('text').on('click', function() {
             let label = d3.select(this)
+            let activeLabel = d3.select('.active')
             let value = label.attr('value')
             if (value != yCurrentSelection) {
+                activeLabel.classed('active', false)
                 label.classed('active', true)
                 yCurrentSelection = value
                 yLinearScale = yScale(data, yCurrentSelection)
