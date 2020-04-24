@@ -1,5 +1,5 @@
-const margin = { top: 50, right: 50, bottom: 70, left: 120 },
-   svgWidth = 900,
+const margin = { top: 50, right: 50, bottom: 70, left: 80 },
+   svgWidth = 850,
    svgHeight = 520,
    chartWidth = svgWidth - margin.left - margin.right,
    chartHeight = svgHeight - margin.top - margin.bottom;;
@@ -119,9 +119,6 @@ function renderYLabels(circleLabelGroup, newYScale, yCurrentSelection) {
         .classed('transform', `translate(${chartWidth}, 0)`)
         .call(leftAxis)
 
-    // create axes
-    // yAxis = renderYAxis(yLinearScale, yAxis),
-    // xAxis = renderXAxis(xLinearScale, xAxis)
 
 
 
@@ -137,6 +134,7 @@ function renderYLabels(circleLabelGroup, newYScale, yCurrentSelection) {
             .style('opacity', .3)
             .attr('stroke', 'black')
             .attr('stroke-width', 2)
+     console.log(xLinearScale(parseFloat("18")))
 
 let circleLabelGroup = chartGroup.append('g')
         .selectAll("text")
@@ -169,9 +167,9 @@ let circleLabelGroup = chartGroup.append('g')
         .classed('active', false)
         .text('Age (Median)')
 
-        xlabelsGroup.selectAll('text').on('click', function() {
+    xlabelsGroup.selectAll('text').on('click', function() {
             let xLabel = d3.select(this)
-            let xActiveLabel = d3.select('.active')
+            let xActiveLabel = xlabelsGroup.select('.active')
             let xValue = xLabel.attr('value')
             console.log(xValue)
             if (xValue != xCurrentSelection) {
@@ -195,26 +193,26 @@ let circleLabelGroup = chartGroup.append('g')
 
     let ylabelsGroup = chartGroup
         .append("g")
-        .attr("transform", `translate(${0 - margin.left}, ${(chartHeight / 2) - 100 })`)
+        .attr("transform", `translate( ${(chartHeight / 2) }, ${0 - margin.left})`)
         .attr('transform', 'rotate(-90)')
     
-    let healthLabel = ylabelsGroup.append('text')
-        .attr('x', - 80)
-        .attr('y', - 40)
+ylabelsGroup.append('text')
+        .attr('x', - (chartHeight / 2) - 20)
+        .attr('y', - margin.left + 55 )
         .attr('value', 'healthcare')
         .classed('active', true)
         .text('Lacks Healtcare (%)')
 
-    let smokeLabel = ylabelsGroup.append('text')
-        .attr('x', - 100)
-        .attr('y', - 60)
+ylabelsGroup.append('text')
+        .attr('x', - (chartHeight / 2) - 20)
+        .attr('y', - margin.left + 35)
         .attr('value', 'smokes')
         .classed('active', false)
         .text('Smokers (%)')
 
-    let obeseLabel = ylabelsGroup.append('text')
-        .attr('x', - 100)
-        .attr('y', - 80)
+ylabelsGroup.append('text')
+        .attr('x', - (chartHeight / 2) - 20)
+        .attr('y', - margin.left + 15)
         .attr('value', 'obesity')
         .classed('active', false)
         .text('Obese (%)')
@@ -223,7 +221,7 @@ let circleLabelGroup = chartGroup.append('g')
 
     ylabelsGroup.selectAll('text').on('click', function() {
             let label = d3.select(this)
-            let activeLabel = d3.select('.active')
+            let activeLabel = ylabelsGroup.select('.active')
             let value = label.attr('value')
             if (value != yCurrentSelection) {
                 activeLabel.classed('active', false)
