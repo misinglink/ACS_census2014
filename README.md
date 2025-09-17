@@ -37,20 +37,3 @@ You're going to include more demographics and more risk factors. Place additiona
 
 - - -
 
-### Assessment
-
-Your final product will be assessed on the following metrics:
-
-* Completion of all steps in chosen level
-
-* Coherency of scatter plot (labels, ticks)
-
-* Visual attraction
-
-* Professionalism
-
-**Good luck!**
-
-## Copyright
-
-Data Boot Camp © 2018. All Rights Reserved.
